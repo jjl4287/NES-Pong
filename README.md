@@ -60,7 +60,7 @@ Feel free to explore, modify, and use the code for your own purposes.
 
 ## Acknowledgments
 
-The code and game logic for this project were primarily developed by [Your Name]. Inspiration and occasional guidance were derived from the Nerdy Nights tutorial for iNES headers and reset. You can find the tutorial at https://nerdy-nights.nes.science/.
+The code and game logic for this project were primarily developed by Jakob Langtry. Inspiration and occasional guidance were derived from the Nerdy Nights tutorial for iNES headers and reset. You can find the tutorial at https://nerdy-nights.nes.science/.
 
 Special thanks to the NES development community for their resources, tools, and support.
 
