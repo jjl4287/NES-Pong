@@ -13,44 +13,84 @@ The NES Pong game is a classic arcade game where two players control paddles to 
 - Basic collision detection and ball movement physics.
 - Score tracking for each player.
 
+## Online Demo
+
+You can play the NES Pong game online at [nes.jakoblangtry.com](https://nes.jakoblangtry.com). The web version uses jsNES to emulate the NES hardware in your browser.
+
+## Project Structure
+
+The project is organized as follows:
+
+```
+NES-Pong/
+├── src/
+│   └── asm/           # Assembly source code
+│       ├── PongTwoPlayer.asm
+│       └── sprites.chr # Sprite data
+├── public/            # Web assets for jsNES
+│   ├── js/            # JavaScript files
+│   ├── roms/          # Compiled NES ROMs
+│   ├── index.html     # Main webpage
+│   └── 404.html       # 404 error page
+├── scripts/           # Utility scripts
+├── bin/               # Binaries (asm6 assembler)
+├── build.js           # Build script
+├── cloudbuild.yaml    # Google Cloud Build configuration
+└── package.json       # Node.js package configuration
+```
+
 ## How It Works
 
 The game is programmed using NES assembly language and runs on NES hardware or compatible emulators. The code utilizes the NES hardware registers and implements game logic to control the ball, paddles, and scoring.
 
-The main components of the game include:
+## Local Development
 
-- **Game State Management:** The game manages different states such as the title screen and gameplay state. The state is determined based on user input from the controllers.
+To set up the project for local development:
 
-- **Controller Input:** The game reads input from the controllers to control the paddles. Player 1 uses the first controller, and in the two-player mode, Player 2 uses the second controller.
+1. Install [Node.js](https://nodejs.org/) (v16 or higher recommended)
+2. Install [pnpm](https://pnpm.io/installation) by running `npm install -g pnpm`
+3. Clone this repository
+4. Install dependencies:
+   ```
+   pnpm install
+   ```
+5. Download the asm6 assembler:
+   ```
+   pnpm run download-asm6
+   ```
+6. Build the project:
+   ```
+   pnpm run build
+   ```
+7. Start the local development server:
+   ```
+   pnpm start
+   ```
+8. Open [http://localhost:8080](http://localhost:8080) in your browser
 
-- **Ball Movement:** The ball's position is updated based on its speed and direction. It bounces off the walls and paddles using collision detection.
+## Google Cloud Hosting
 
-- **Paddle Movement:** The paddles move up or down based on player input. In the single-player mode, the second player's paddle is controlled by automated logic.
+This project is hosted on Google Cloud Storage, with automatic deployments via Google Cloud Build.
 
-- **Collision Detection:** The game checks for collisions between the ball and the paddles, as well as the ball and the walls. When a collision occurs, the ball's direction is adjusted accordingly.
+### Infrastructure
 
-- **Scoring:** The game keeps track of each player's score. A point is awarded when the ball passes beyond the opponent's paddle.
+- **Google Cloud Project**: `jakoblangtry-com`
+- **Storage Bucket**: `nes.jakoblangtry.com`
+- **Domain**: The website is accessible at [nes.jakoblangtry.com](https://nes.jakoblangtry.com)
+- **Continuous Deployment**: Changes to the main branch automatically trigger a new build and deployment
+
+### Manual Deployment
+
+If you want to deploy manually:
+
+```
+pnpm run build
+pnpm run deploy
+```
 
 ## System Compatibility
 
-The NES Pong game is compatible with NES hardware and NES emulators that support NES assembly code. To run the game, you need to assemble the code and generate a ROM file using the nesasm assembler.
-
-### Prerequisites
-
-- nesasm: The NES assembler. You can download it from [https://github.com/camsaul/nesasm](https://github.com/camsaul/nesasm) and follow the installation instructions for your operating system.
-
-### Building and Running the Game
-
-1. Clone or download this repository to your local machine.
-2. Open a terminal or command prompt and navigate to the repository directory.
-3. Run the following command to assemble the code and generate a ROM file:
-
-   ```shell
-   nesasm pong.asm
-   ```
-This will create a pong.nes ROM file.
-
-4. Run the ROM file using an NES emulator or flash it to a cartridge to run on NES hardware.
+The NES Pong game is compatible with NES hardware and NES emulators that support NES assembly code. The web version uses jsNES to emulate the NES hardware in your browser.
 
 ## License
 
@@ -62,6 +102,6 @@ Feel free to explore, modify, and use the code for your own purposes.
 
 The code and game logic for this project were primarily developed by Jakob Langtry. Inspiration and occasional guidance were derived from the Nerdy Nights tutorial for iNES headers and reset. You can find the tutorial at https://nerdy-nights.nes.science/.
 
-Special thanks to the NES development community for their resources, tools, and support.
+Special thanks to the NES development community for their resources, tools, and support, and to the jsNES project for providing the JavaScript NES emulator.
 
 If you have any questions or suggestions, feel free to reach out!
