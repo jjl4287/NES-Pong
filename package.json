@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "node build.js",
+    "create-jsnes-rom": "node scripts/create-jsnes-rom.js",
     "start": "http-server public -p 8080",
     "deploy": "npm run build && gcloud storage cp public/* gs://nes.jakoblangtry.com/ --recursive",
-    "download-nesasm": "node scripts/download-nesasm.js"
+    "download-nesasm": "node scripts/download-nesasm.js",
+    "examine-rom": "node scripts/examine-rom.js"
   },
   "keywords": ["nes", "pong", "jsnes", "6502", "assembly"],
   "author": "Jakob Langtry",

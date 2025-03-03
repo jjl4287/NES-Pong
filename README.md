@@ -1,107 +1,51 @@
-# NES-Pong
+# NES Pong
 
-This repository contains two versions of a simple Pong game for the NES (Nintendo Entertainment System). One version features an automated second player, while the other version allows for two-player gameplay using separate controllers. These games were written in 2021 and serve as a demonstration of game development skills using 6504 assembly language.
+A simple Pong game for the NES, written in 6502 Assembly and playable in the browser using jsNES.
 
 ## Overview
 
-The NES Pong game is a classic arcade game where two players control paddles to hit a ball back and forth across the screen. The objective is to prevent the ball from reaching your side of the screen while trying to score points by getting the ball past your opponent's paddle.
+This project is a two-player Pong game for the Nintendo Entertainment System (NES). The game is written in 6502 Assembly and compiled using NESASM. The compiled ROM is then served in a web browser using the jsNES emulator.
 
-### Features
+## Controls
 
-- Single-player mode with an automated second player (CPU opponent).
-- Two-player mode with separate controller support.
-- Basic collision detection and ball movement physics.
-- Score tracking for each player.
+- **Player 1 (Left Paddle)**
+  - Up: W
+  - Down: S
 
-## Online Demo
+- **Player 2 (Right Paddle)**
+  - Up: Up Arrow
+  - Down: Down Arrow
 
-You can play the NES Pong game online at [nes.jakoblangtry.com](https://nes.jakoblangtry.com). The web version uses jsNES to emulate the NES hardware in your browser.
+- **Start Game**: Enter key or click the Start button
 
 ## Project Structure
 
-The project is organized as follows:
+- `src/asm/` - Contains the 6502 Assembly source code
+- `public/` - Contains the web files served to the browser
+- `bin/` - Contains the NESASM compiler binary
 
-```
-NES-Pong/
-├── src/
-│   └── asm/           # Assembly source code
-│       ├── PongTwoPlayer.asm
-│       └── sprites.chr # Sprite data
-├── public/            # Web assets for jsNES
-│   ├── js/            # JavaScript files
-│   ├── roms/          # Compiled NES ROMs
-│   ├── index.html     # Main webpage
-│   └── 404.html       # 404 error page
-├── scripts/           # Utility scripts
-├── bin/               # Binaries (asm6 assembler)
-├── build.js           # Build script
-├── cloudbuild.yaml    # Google Cloud Build configuration
-└── package.json       # Node.js package configuration
-```
+## Building the Project
+
+1. Make sure you have Node.js installed
+2. Install dependencies: `pnpm install`
+3. Build the project: `pnpm run build`
+4. Serve the project: `cd public && python3 -m http.server 8000`
+5. Open your browser to `http://localhost:8000`
 
 ## How It Works
 
-The game is programmed using NES assembly language and runs on NES hardware or compatible emulators. The code utilizes the NES hardware registers and implements game logic to control the ball, paddles, and scoring.
+1. The 6502 Assembly code (`PongTwoPlayer.asm`) is compiled using NESASM to create a NES ROM file
+2. The ROM file is copied to the `public/roms` directory
+3. The jsNES emulator is used to run the ROM in the browser
+4. The game is controlled using keyboard inputs mapped to NES controller buttons
 
-## Local Development
+## Troubleshooting
 
-To set up the project for local development:
+If you see a black screen:
+- Check the browser console for errors
+- Make sure the ROM file is being loaded correctly
+- Verify that the jsNES library is being loaded
 
-1. Install [Node.js](https://nodejs.org/) (v16 or higher recommended)
-2. Install [pnpm](https://pnpm.io/installation) by running `npm install -g pnpm`
-3. Clone this repository
-4. Install dependencies:
-   ```
-   pnpm install
-   ```
-5. Download the asm6 assembler:
-   ```
-   pnpm run download-asm6
-   ```
-6. Build the project:
-   ```
-   pnpm run build
-   ```
-7. Start the local development server:
-   ```
-   pnpm start
-   ```
-8. Open [http://localhost:8080](http://localhost:8080) in your browser
+## Credits
 
-## Google Cloud Hosting
-
-This project is hosted on Google Cloud Storage, with automatic deployments via Google Cloud Build.
-
-### Infrastructure
-
-- **Google Cloud Project**: `jakoblangtry-com`
-- **Storage Bucket**: `nes.jakoblangtry.com`
-- **Domain**: The website is accessible at [nes.jakoblangtry.com](https://nes.jakoblangtry.com)
-- **Continuous Deployment**: Changes to the main branch automatically trigger a new build and deployment
-
-### Manual Deployment
-
-If you want to deploy manually:
-
-```
-pnpm run build
-pnpm run deploy
-```
-
-## System Compatibility
-
-The NES Pong game is compatible with NES hardware and NES emulators that support NES assembly code. The web version uses jsNES to emulate the NES hardware in your browser.
-
-## License
-
-This project is licensed under the MIT License.
-
-Feel free to explore, modify, and use the code for your own purposes.
-
-## Acknowledgments
-
-The code and game logic for this project were primarily developed by Jakob Langtry. Inspiration and occasional guidance were derived from the Nerdy Nights tutorial for iNES headers and reset. You can find the tutorial at https://nerdy-nights.nes.science/.
-
-Special thanks to the NES development community for their resources, tools, and support, and to the jsNES project for providing the JavaScript NES emulator.
-
-If you have any questions or suggestions, feel free to reach out!
+Created by Jakob Langtry. Powered by [jsNES](https://github.com/bfirsh/jsnes).
